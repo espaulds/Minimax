@@ -105,6 +105,8 @@ public class NimRunner {
         return (int) Math.random()*3;
     }
 
+    
+
     //extra 
     // public static void display(){
         
@@ -122,5 +124,22 @@ change move to parallel AL
 - Xmove & Ymove no longer integer now AL
 - change for loops not to be hard coded to 3 moves
 - need an AL of AL with all possible moves
+
+- outside for loop runs amount of piles
+- inside for loop runs peices in each pile 
+- runs minimax on all possible moves within pieces in each pile (1-max in pile), gets best move
+*/
+
+/*
+#1 --> set up moves AL(AL(INT))
+#2 --> (outer loop) for loop to iterate though each state (represents each pile)
+    #3 --> (inner loop) for loop (or while loop) to iterate through number of possible pieces you can take from THIS particular pile (this particular index)
+        can take from 1 - num of pieces (runs for numPieces)
+        #4 --> make new AL(INT) (oneMove) represents one move (move being made or considered), being added to AL(AL(INT)) later
+            empty arraylist [0,0,0]
+        #5 --> at the index at in state (pile index), add the number of pieces 
+            add where you are in loop to arraylist (at that pile): if at 1 --> [1,0,0], if 2 --> [2,0,0]
+        #6 --> add onMove to moves
+
 
 */
