@@ -5,23 +5,34 @@ public class NimRunner {
 
     public static void main(String[] args){
         boolean turn = true;
-        runGame();
+        //runGame(true);
     }
 
-    public static boolean runGame(boolean turn){
-        int state = 10;
-        while(state > 0){           
+    //runs game of simple nim game
+    public static boolean runGame(int state, boolean turn){
+        //random state number
+        //int state = 10;
+        //runs loop while state is more than 0
+        while(state > 0){  
+            //if it is your turn...         
             if(turn == true){
+                //...the state is altered by your move (hard coded to be 1)
                 state = state - getXMove(state);
+                //change so next loop is not your turn
                 turn = false;
+            //if it is not your turn...
             } else {
+                //...the state is altered by their move (hard coded to be 1)
                 state = state - getYMove(state);
+                //change so next loop is your turn
                 turn = true;
             }
         }
+        //returns true if X one, false if Y won
         return turn;
     }
 
+    //move methods --> hard coded to be 1 for both
     public static int getXMove(int state){
         return 1;
     }
@@ -30,8 +41,68 @@ public class NimRunner {
         return 1;
     }
 
-    public static int minimax(int state, boolean myTurn){
-        
+    //tells if state is good or bad for player
+    public static int minimax(int numPiecesRemaining, boolean myTurn){
+        //base case --> getting best outcome scores
+        if(numPiecesRemaining == 0){
+            if(myTurn == true){
+                //good for player one
+                return 1;
+            } else {
+                //bad for player one
+                return -1;
+            }
+        //recursive step
+        } else { 
+            //arraylist to hold all possible scores in the turn
+            ArrayList<Integer> scores = new ArrayList<>();
+            //for loop going through all 3 possible moves
+            for(int numPiecesToTake = 1; numPiecesToTake<4; numPiecesToTake++){
+                //if that move can be made (you can take that number of pieces)...
+                if(numPiecesRemaining >= numPiecesToTake){
+                    //...change state of number of peices...
+                    numPiecesRemaining = numPiecesRemaining - numPiecesToTake;
+                    //..change player turn...
+                    myTurn = !myTurn;
+                    //...and add best outcome scores to score
+                        //runnning minimax recursively again to get that information in base case
+                    scores.add(minimax(numPiecesRemaining, myTurn));
+                }
+            }
+            //if it is your turn...
+            if(myTurn = true){
+                //...return the HIGHEST (1) of the array
+                return Collections.max(scores); //return max of array
+            } else {
+                //...return the LOWEST (-1) of the array
+                return Collections.min(scores); //return min of array
+            }
+        }
+    }
+
+    //gets the best possible move for the player
+    public static int bestMove(int numPiecesRemaining, boolean myTurn){
+        //for the number of possible moves (taking 1-3)
+        for(int numPiecesToTake = 1; numPiecesToTake<4; numPiecesToTake++){
+            //delcaring varible for minimax (to see if move is good or bad)
+            int determination = 0;
+            ///if move can be made...
+            if(numPiecesRemaining >= numPiecesToTake){
+                //...change state of pile...
+                numPiecesRemaining = numPiecesRemaining - numPiecesToTake; 
+                //...change player turn...
+                myTurn = !myTurn;
+                //...set determination to best move for player from minimax
+                determination = minimax(numPiecesRemaining, myTurn);
+            }  
+            //if determination is 1 (good for player)...
+            if(determination == 1){
+                //...do that turn
+                return numPiecesToTake;
+            }
+        }
+        //if a best move doesn't exist (1), then just do a random move (1-3)
+        return (int) Math.random()*3;
     }
 
     //extra 
@@ -39,3 +110,17 @@ public class NimRunner {
         
     // }
 }
+
+
+/*refactoring --> 
+- for loop for number of moves (possible to take more than 3)
+- change state to add piles 
+- change how many you can take based on how many are in a pile
+
+change state to AL
+change move to parallel AL
+- Xmove & Ymove no longer integer now AL
+- change for loops not to be hard coded to 3 moves
+- need an AL of AL with all possible moves
+
+*/
