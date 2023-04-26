@@ -60,17 +60,13 @@ public class NimRunner {
             for(int numPiecesToTake = 1; numPiecesToTake<4; numPiecesToTake++){
                 //if that move can be made (you can take that number of pieces)...
                 if(numPiecesRemaining >= numPiecesToTake){
-                    //...change state of number of peices...
-                    numPiecesRemaining = numPiecesRemaining - numPiecesToTake;
-                    //..change player turn...
-                    myTurn = !myTurn;
                     //...and add best outcome scores to score
                         //runnning minimax recursively again to get that information in base case
-                    scores.add(minimax(numPiecesRemaining, myTurn));
+                    scores.add(minimax(numPiecesRemaining-numPiecesToTake, !myTurn));
                 }
             }
             //if it is your turn...
-            if(myTurn = true){
+            if(myTurn == true){
                 //...return the HIGHEST (1) of the array
                 return Collections.max(scores); //return max of array
             } else {
@@ -88,21 +84,19 @@ public class NimRunner {
             int determination = 0;
             ///if move can be made...
             if(numPiecesRemaining >= numPiecesToTake){
-                //...change state of pile...
-                numPiecesRemaining = numPiecesRemaining - numPiecesToTake; 
-                //...change player turn...
-                myTurn = !myTurn;
                 //...set determination to best move for player from minimax
-                determination = minimax(numPiecesRemaining, myTurn);
+                determination = minimax(numPiecesRemaining-numPiecesToTake, !myTurn);
             }  
             //if determination is 1 (good for player)...
-            if(determination == 1){
+            if(determination == 1 && myTurn == true){
                 //...do that turn
+                return numPiecesToTake;
+            } else if(determination == -1 && myTurn == false) {
                 return numPiecesToTake;
             }
         }
         //if a best move doesn't exist (1), then just do a random move (1-3)
-        return (int) Math.random()*3;
+        return (int) Math.random()*3+1;
     }
 
     
@@ -130,7 +124,7 @@ change move to parallel AL
 - runs minimax on all possible moves within pieces in each pile (1-max in pile), gets best move
 */
 
-/*
+/* getPossMoves()
 #1 --> set up moves AL(AL(INT))
 #2 --> (outer loop) for loop to iterate though each state (represents each pile)
     #3 --> (inner loop) for loop (or while loop) to iterate through number of possible pieces you can take from THIS particular pile (this particular index)
@@ -141,5 +135,15 @@ change move to parallel AL
             add where you are in loop to arraylist (at that pile): if at 1 --> [1,0,0], if 2 --> [2,0,0]
         #6 --> add onMove to moves
 
+
+called in Minimax
+- passing in state AL
+    minimax:
+    getPossMoves(state)
+        iterate through moves
+            figure out new state
+            call minimax(new state)
+called in getX & getY
+ 
 
 */
