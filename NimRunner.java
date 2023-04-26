@@ -87,11 +87,13 @@ public class NimRunner {
                 //...set determination to best move for player from minimax
                 determination = minimax(numPiecesRemaining-numPiecesToTake, !myTurn);
             }  
-            //if determination is 1 (good for player)...
+            //if determination is 1 (good for player 1)...
             if(determination == 1 && myTurn == true){
                 //...do that turn
                 return numPiecesToTake;
+            //if determination is -1 (good for player 2)...
             } else if(determination == -1 && myTurn == false) {
+                //...they do that turn
                 return numPiecesToTake;
             }
         }
