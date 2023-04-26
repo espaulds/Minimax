@@ -56,9 +56,9 @@ public class NimRunner {
         //recursive step
             } else { 
                 //arraylist to hold all possible scores in the turn
-                ArrayList<Integer> scores = new ArrayList<>();
+                ArrayList<ArrayList<Integer>> scores = getPossMoves(numPiecesRemaining);
                 //for loop going through all 3 possible moves
-                for(int numPiecesToTake = 1; numPiecesToTake<numPiecesRemaining.size(); numPiecesToTake++){
+                for(int numPiecesToTake = 1; numPiecesToTake<getPossMoves.size(); numPiecesToTake++){
                     //if that move can be made (you can take that number of pieces)...
                     if(numPiecesRemaining.get(i) >= numPiecesToTake){
                         //...and add best outcome scores to score
@@ -104,7 +104,7 @@ public class NimRunner {
 
 
         //regular nim attempt code for getting possible moves
-        public static ArrayList<ArrayList<Integer>> getPossMoves(ArrayList<Integer> state, boolean turn){
+        public static ArrayList<ArrayList<Integer>> getPossMoves(ArrayList<Integer> state){
             ArrayList<ArrayList<Integer>> numMoves = new ArrayList<ArrayList<>>();
             for(int i = 0; i<state.size(); i++){
                 for(int i = j; j<state.get(i); j++){
