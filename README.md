@@ -2,8 +2,8 @@
 
 ## background and motivation:
 
-Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps or piles. The Minimax algorithm is a simulation of Nim that generates the most optimal move (choosing from 1-3 objects from the pile) for the player. Using recusion, the program is able to generate all possible outcomes for the player, therefore, it is sure to predict the most optimal path to take in order to win the game. 
-Nim is a very good test for this algorthm as there are many possible outcomes based on how many object a player takes, therefore, many places for the recusive function to run. (ask about**)
+- Nim is a mathematical game of strategy in which two players take turns removing objects from distinct heaps or piles. The Minimax algorithm is a simulation of Nim that generates the most optimal move (choosing from 1-3 objects from the pile) for the player. Using recusion, the program is able to generate all possible outcomes for the player, therefore, it is sure to predict the most optimal path to take in order to win the game. 
+- Nim is a very good test for this algorthm as there are many possible outcomes based on how many object a player takes, therefore, many places for the recusive function to run. (ask about**)
 
 ## usage:
 If someone were to run this program through the command line, theoretically this code code read-in a game tree/map file (if I were to add a parse method to do so). For now, the input for the simple nim game should just be number of starting pieces and who has the first turn. 
