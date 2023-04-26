@@ -1,0 +1,8 @@
+1. some time and space limitations in my current algorithm is that the higher the starting state is, the more branching that is done when calling the recursion, meaning it will take longer to run 
+2. my bot most likely will not win EVERY possible game of SimpleNim due to the fact that the bot may not play first each time; if it does not play first 
+3.
+    #1 --> change base case returns for Minimax
+        - so if myTurn == true, return -1; myTurn == false, return 1
+    #2 --> change the recursive returns for Minimax
+        - so if myTurn == true, return Collections.min(scores) & vis versa
+4. a non-Nim game with would NOT work well on is tic-tac-toe or go fish since they are not a zero-sum games and have the possibility of tying
